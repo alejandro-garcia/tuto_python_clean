@@ -2,6 +2,8 @@ from src.resources.application.create_resource import CreateResource
 from src.resources.domain.models import Resource
 from src.resources.domain.repositories import ResourcesRepository
 from src.resources.application.create_resource import CreateResourceCommand
+from src.resources.domain.exceptions import UrlIsNotValid
+import pytest
 
 class FakeResourcesRepository(ResourcesRepository):
     def __init__(self):
@@ -17,11 +19,13 @@ class FakeResourcesRepository(ResourcesRepository):
 class TestCreateResource:
     def test_creates_resource(self) -> None:
         resource_repository = FakeResourcesRepository()
-        CreateResource(resource_repository).execute(
-            CreateResourceCommand(
-                resource_url="https://example.com"
+
+        with pytest.raises(UrlIsNotValid):
+            CreateResource(resource_repository).execute(
+                CreateResourceCommand(
+                    resource_url="https://example.com"
+                )
             )
-        )
 
         resources = resource_repository.all()
         assert len(resources) == 1 
