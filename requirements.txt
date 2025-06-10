@@ -1,2 +1,8 @@
+#API
+fastapi==0.115.12
+#linting
 mypy==1.16.0
 ruff==0.11.13
+#tests 
+httpx==0.28.1
+pytest==8.4.0
