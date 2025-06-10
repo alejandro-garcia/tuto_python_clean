@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
-from resources.domain.models import Resource
+from src.resources.domain.models import Resource
 
 class ResourcesRepository(ABC):
     @abstractmethod
-    def get(self) -> Resource: ...
+    def all(self) -> list[Resource]: ...
     
+    @abstractmethod
+    def save(self, resource: Resource) -> None: ...

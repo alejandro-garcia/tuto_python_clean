@@ -1,5 +1,5 @@
-from resources.domain.models import Resource
-from resources.domain.repositories import ResourcesRepository
+from src.resources.domain.models import Resource
+from src.resources.domain.repositories import ResourcesRepository
 
 class PostgreSQLResourcesRepository(ResourcesRepository):
     def get(self) -> Resource: 
