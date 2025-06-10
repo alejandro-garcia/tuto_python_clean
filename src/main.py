@@ -1,11 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI 
+from src.shared.infraestructure.api import router
 
 app = FastAPI()
+app.include_router(router)
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-@app.get("/health")
-def health_check():
-    return {"status": "ok"}
+# @app.get("/")
+# def read_root():
+#     return {"Hello": "World"}
