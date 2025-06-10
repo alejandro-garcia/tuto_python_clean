@@ -3,6 +3,7 @@ from src.resources.domain.models import Resource
 from src.resources.domain.repositories import ResourcesRepository
 from src.resources.application.create_resource import CreateResourceCommand
 from src.resources.domain.exceptions import UrlIsNotValid
+from src.resources.domain.value_objects import ResourceUrl
 import pytest
 
 class FakeResourcesRepository(ResourcesRepository):
@@ -23,10 +24,10 @@ class TestCreateResource:
         with pytest.raises(UrlIsNotValid):
             CreateResource(resource_repository).execute(
                 CreateResourceCommand(
-                    resource_url="https://example.com"
+                    resource_url= ResourceUrl(value="https://www.google.com")
                 )
             )
 
         resources = resource_repository.all()
         assert len(resources) == 1 
-        assert resources[0].url() == "https://example.com"
+        assert resources[0].url() == ResourceUrl(value="https://www.google.com")
